@@ -12,19 +12,19 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 98765 43210", "+91 98765 43211"],
-    action: { href: "tel:+919876543210", label: "Call Now" }
+    details: ["+91 6006256798", "+91 6006256798"],
+    action: { href: "tel:+916006256798", label: "Call Now" }
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["info@traveloom.com", "booking@traveloom.com"],
-    action: { href: "mailto:info@traveloom.com", label: "Send Email" }
+    details: ["traveloomsales@gmail.com", "traveloomsales@gmail.com"],
+    action: { href: "traveloomsales@gmail.com", label: "Send Email" }
   },
   {
     icon: MapPin,
     title: "Office Address",
-    details: ["Residency Road, Srinagar", "Jammu & Kashmir, India - 190001"],
+    details: ["Chandiloora Gulmarg, Baramulla", "Jammu & Kashmir, India - 193101"],
     action: { href: "https://maps.google.com/?q=Residency+Road+Srinagar", label: "Get Directions" }
   },
   {

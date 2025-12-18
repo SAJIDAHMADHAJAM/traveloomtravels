@@ -43,8 +43,14 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-4">
             <a href="tel:+919876543210" className="flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
               <Phone className="h-4 w-4" />
-              +91 98765 43210
+              +91 6006256798
             </a>
+
+            
+
+
+
+
             <Button asChild variant="golden" size="lg">
               <Link to="/booking">Book Now</Link>
             </Button>
@@ -78,7 +84,7 @@ const Header = () => {
               ))}
               <a href="tel:+919876543210" className="flex items-center gap-2 text-base font-medium text-foreground/80 py-2">
                 <Phone className="h-4 w-4" />
-                +91 98765 43210
+                +91 6006256798
               </a>
               <Button asChild variant="golden" className="mt-2">
                 <Link to="/booking" onClick={() => setIsMenuOpen(false)}>Book Now</Link>

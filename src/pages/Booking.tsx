@@ -305,14 +305,14 @@ const Booking = () => {
               <Phone className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="font-semibold text-foreground mb-1">Call Us Directly</h3>
               <a href="tel:+919876543210" className="text-primary hover:underline">
-                +91 98765 43210
+                +91 6006256798
               </a>
             </Card>
             <Card className="p-6 bg-card text-center">
               <Mail className="h-8 w-8 text-primary mx-auto mb-3" />
               <h3 className="font-semibold text-foreground mb-1">Email Us</h3>
               <a href="mailto:info@traveloom.com" className="text-primary hover:underline">
-                info@traveloom.com
+                tarveloomsales@gmail.com
               </a>
             </Card>
           </div>

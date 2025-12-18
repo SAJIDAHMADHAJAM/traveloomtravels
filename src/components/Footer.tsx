@@ -70,19 +70,19 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-golden" />
                 <span className="text-sm text-primary-foreground/80">
-                  Residency Road, Srinagar,<br />Jammu & Kashmir, India - 190001
+                  Chandiloora Gulmarg, Baramulla,<br />Jammu & Kashmir, India - 193402
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 flex-shrink-0 text-golden" />
                 <a href="tel:+919876543210" className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  +91 98765 43210
+                  +91 6006256798
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 flex-shrink-0 text-golden" />
                 <a href="mailto:info@traveloom.com" className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  info@traveloom.com
+                  traveloomsales@gmail.com
                 </a>
               </li>
             </ul>
