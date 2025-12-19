@@ -98,11 +98,21 @@ const Admin = () => {
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
       pending: "secondary",
+      contacted: "outline",
       confirmed: "default",
-      completed: "outline",
+      payment_pending: "secondary",
+      completed: "default",
       cancelled: "destructive",
     };
-    return <Badge variant={variants[status] || "secondary"}>{status}</Badge>;
+    const labels: Record<string, string> = {
+      pending: "Pending",
+      contacted: "Contacted",
+      confirmed: "Confirmed",
+      payment_pending: "Payment Pending",
+      completed: "Completed",
+      cancelled: "Cancelled",
+    };
+    return <Badge variant={variants[status] || "secondary"}>{labels[status] || status}</Badge>;
   };
 
   return (
@@ -138,7 +148,9 @@ const Admin = () => {
                 <SelectContent>
                   <SelectItem value="all">All Status</SelectItem>
                   <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="contacted">Contacted</SelectItem>
                   <SelectItem value="confirmed">Confirmed</SelectItem>
+                  <SelectItem value="payment_pending">Payment Pending</SelectItem>
                   <SelectItem value="completed">Completed</SelectItem>
                   <SelectItem value="cancelled">Cancelled</SelectItem>
                 </SelectContent>
@@ -151,7 +163,7 @@ const Admin = () => {
         </Card>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
           <Card className="p-4 bg-card">
             <p className="text-sm text-muted-foreground">Total</p>
             <p className="text-2xl font-bold text-foreground">{bookings.length}</p>
@@ -163,9 +175,21 @@ const Admin = () => {
             </p>
           </Card>
           <Card className="p-4 bg-card">
+            <p className="text-sm text-muted-foreground">Contacted</p>
+            <p className="text-2xl font-bold text-blue-600">
+              {bookings.filter((b) => b.status === "contacted").length}
+            </p>
+          </Card>
+          <Card className="p-4 bg-card">
             <p className="text-sm text-muted-foreground">Confirmed</p>
             <p className="text-2xl font-bold text-green-600">
               {bookings.filter((b) => b.status === "confirmed").length}
+            </p>
+          </Card>
+          <Card className="p-4 bg-card">
+            <p className="text-sm text-muted-foreground">Payment Pending</p>
+            <p className="text-2xl font-bold text-orange-600">
+              {bookings.filter((b) => b.status === "payment_pending").length}
             </p>
           </Card>
           <Card className="p-4 bg-card">
@@ -244,7 +268,9 @@ const Admin = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="contacted">Contacted</SelectItem>
                         <SelectItem value="confirmed">Confirmed</SelectItem>
+                        <SelectItem value="payment_pending">Payment Pending</SelectItem>
                         <SelectItem value="completed">Completed</SelectItem>
                         <SelectItem value="cancelled">Cancelled</SelectItem>
                       </SelectContent>
