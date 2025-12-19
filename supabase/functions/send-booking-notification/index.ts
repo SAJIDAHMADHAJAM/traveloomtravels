@@ -33,7 +33,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification to admin
     const adminEmailResponse = await resend.emails.send({
       from: "Kashmir Tours <onboarding@resend.dev>",
-      to: ["your-email@example.com"], // Replace with your actual email
+      to: ["traveloomsales@gmail.com"],
       subject: `New Booking: ${booking.package} - ${booking.name}`,
       html: `
         <h1>New Booking Received!</h1>
