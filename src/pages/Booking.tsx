@@ -70,6 +70,24 @@ const Booking = () => {
 
       if (error) throw error;
 
+      // Send email notification
+      try {
+        await supabase.functions.invoke('send-booking-notification', {
+          body: {
+            name: formData.fullName,
+            email: formData.email || '',
+            phone: formData.phone,
+            package: packageName,
+            travelDate: formData.arrivalDate,
+            travelers: totalTravelers,
+            message: formData.specialRequirements,
+          },
+        });
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+        // Don't fail the booking if email fails
+      }
+
       toast({
         title: "Booking Request Received!",
         description: "Our team will contact you within 2 hours to confirm your booking.",
