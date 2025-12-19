@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, Users, Phone, Mail, User, Plane } from "lucide-react";
 import { packages } from "@/data/packages";
+import { supabase } from "@/integrations/supabase/client";
 import heroImage from "@/assets/hero-kashmir.jpg";
 
 const Booking = () => {
@@ -51,29 +52,52 @@ const Booking = () => {
       return;
     }
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const totalTravelers = parseInt(formData.adults) + parseInt(formData.children || "0");
+      const packageName = formData.selectedPackage 
+        ? packages.find(p => p.id === formData.selectedPackage)?.name || formData.selectedPackage
+        : "Custom Package";
 
-    toast({
-      title: "Booking Request Received!",
-      description: "Our team will contact you within 2 hours to confirm your booking.",
-    });
+      const { error } = await supabase.from("bookings").insert({
+        name: formData.fullName,
+        email: formData.email || null,
+        phone: formData.phone,
+        package: packageName,
+        travel_date: formData.arrivalDate,
+        travelers: totalTravelers,
+        message: `Days: ${formData.numberOfDays}, Adults: ${formData.adults}, Children: ${formData.children}, Need Tickets: ${formData.needTickets ? 'Yes' : 'No'}${formData.specialRequirements ? `, Requirements: ${formData.specialRequirements}` : ''}`,
+      });
 
-    // Reset form
-    setFormData({
-      fullName: "",
-      phone: "",
-      email: "",
-      arrivalDate: "",
-      numberOfDays: "",
-      adults: "2",
-      children: "0",
-      selectedPackage: "",
-      needTickets: false,
-      specialRequirements: "",
-    });
-    
-    setIsSubmitting(false);
+      if (error) throw error;
+
+      toast({
+        title: "Booking Request Received!",
+        description: "Our team will contact you within 2 hours to confirm your booking.",
+      });
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        arrivalDate: "",
+        numberOfDays: "",
+        adults: "2",
+        children: "0",
+        selectedPackage: "",
+        needTickets: false,
+        specialRequirements: "",
+      });
+    } catch (error) {
+      console.error("Booking error:", error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
