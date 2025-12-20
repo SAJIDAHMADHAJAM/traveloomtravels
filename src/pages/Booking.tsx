@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
