@@ -10,11 +10,11 @@ const Packages = () => {
   return (
     <>
       <Helmet>
-        <title>Kashmir Tour Packages 2025 | Srinagar, Gulmarg, Pahalgam Tours from ₹12,999 - Traveloom</title>
+        <title>Kashmir Tour Packages | Srinagar, Gulmarg, Pahalgam Tours from ₹12,999 - Traveloom</title>
         <meta name="description" content="Browse our Kashmir tour packages starting ₹12,999. 3N/4D to 6N/7D packages covering Srinagar, Gulmarg, Pahalgam, Sonamarg. Honeymoon, family & adventure tours. Book now!" />
         <meta name="keywords" content="Kashmir packages, Srinagar tour package, Gulmarg package, Pahalgam tour, Kashmir honeymoon package, family Kashmir tour, budget Kashmir trip, Kashmir 3 days package, Kashmir 5 days tour" />
         <link rel="canonical" href="https://traveloom.in/packages" />
-        <meta property="og:title" content="Kashmir Tour Packages 2025 | Best Prices - Traveloom" />
+        <meta property="og:title" content="Kashmir Tour Packages | Best Prices - Traveloom" />
         <meta property="og:description" content="Kashmir tour packages from ₹12,999. Srinagar, Gulmarg, Pahalgam, Sonamarg tours." />
         <meta property="og:url" content="https://traveloom.in/packages" />
       </Helmet>
@@ -32,7 +32,7 @@ const Packages = () => {
         </div>
         <div className="relative z-10 container-custom text-center text-primary-foreground">
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-up">
-            Kashmir Tour Packages 2025
+            Kashmir Tour Packages
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto animate-fade-up delay-100">
             Affordable Kashmir holiday packages from ₹12,999 - Srinagar, Gulmarg, Pahalgam, Sonamarg, Ladakh & Katra tours
