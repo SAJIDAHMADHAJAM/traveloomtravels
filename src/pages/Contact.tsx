@@ -144,7 +144,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <Button asChild variant="secondary" className="w-full mt-4 bg-primary-foreground text-[#25D366] hover:bg-primary-foreground/90">
-                  <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/916006256798" target="_blank" rel="noopener noreferrer">
                     Chat on WhatsApp
                   </a>
                 </Button>
