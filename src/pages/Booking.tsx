@@ -8,10 +8,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Calendar, Users, Phone, Mail, User, Plane } from "lucide-react";
+import { Calendar, Users, Phone, Mail, User, Plane, MessageCircle } from "lucide-react";
 import { packages } from "@/data/packages";
 import heroImage from "@/assets/hero-kashmir.jpg";
 import emailjs from "emailjs-com";
+
+const hotelCategories = [
+  { value: "2-star", label: "2 Star (Budget)" },
+  { value: "3-star", label: "3 Star (Standard)" },
+  { value: "4-star", label: "4 Star (Premium)" },
+  { value: "5-star", label: "5 Star (Luxury)" },
+];
 
 const Booking = () => {
   const [searchParams] = useSearchParams();
@@ -27,11 +34,18 @@ const Booking = () => {
     adults: "2",
     children: "0",
     selectedPackage: preselectedPackage,
+    hotelCategory: "",
     needTickets: false,
     specialRequirements: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+    setFormData((prev) => ({ ...prev, phone: value }));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -84,6 +98,8 @@ const handleSubmit = async (e: React.FormEvent) => {
         "Our team will contact you within 2 hours to confirm your booking.",
     });
 
+    setIsSubmitted(true);
+
     setFormData({
       fullName: "",
       phone: "",
@@ -93,6 +109,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       adults: "2",
       children: "0",
       selectedPackage: "",
+      hotelCategory: "",
       needTickets: false,
       specialRequirements: "",
     });
@@ -151,16 +168,25 @@ const handleSubmit = async (e: React.FormEvent) => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="+91 XXXXX XXXXX"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                    />
+                    <Label htmlFor="phone">Phone Number * (10 digits)</Label>
+                    <div className="flex">
+                      <span className="inline-flex items-center px-3 text-sm text-muted-foreground bg-muted border border-r-0 border-input rounded-l-md">
+                        +91
+                      </span>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9]{10}"
+                        maxLength={10}
+                        placeholder="Enter 10 digit number"
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        className="rounded-l-none"
+                        required
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2 md:col-span-2">
                     <Label htmlFor="email">Email Address</Label>
@@ -227,6 +253,24 @@ const handleSubmit = async (e: React.FormEvent) => {
                         {packages.map((pkg) => (
                           <SelectItem key={pkg.id} value={pkg.id}>
                             {pkg.name} - {pkg.duration}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="hotelCategory">Hotel Category</Label>
+                    <Select 
+                      value={formData.hotelCategory} 
+                      onValueChange={(value) => setFormData((prev) => ({ ...prev, hotelCategory: value }))}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select hotel category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {hotelCategories.map((category) => (
+                          <SelectItem key={category.value} value={category.value}>
+                            {category.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -329,6 +373,37 @@ const handleSubmit = async (e: React.FormEvent) => {
                   Our travel expert will call you within 2 hours to discuss your requirements and provide the best quote.
                 </p>
               </div>
+
+              {/* WhatsApp Button - Shows after successful submission */}
+              {isSubmitted && (
+                <div className="pt-4 animate-fade-in">
+                  <Card className="p-6 bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
+                    <div className="text-center space-y-4">
+                      <div className="flex items-center justify-center gap-2 text-green-700 dark:text-green-300">
+                        <MessageCircle className="h-6 w-6" />
+                        <h3 className="font-semibold text-lg">Booking Request Submitted!</h3>
+                      </div>
+                      <p className="text-sm text-green-600 dark:text-green-400">
+                        Want a faster response? Chat with us on WhatsApp for instant assistance.
+                      </p>
+                      <Button 
+                        asChild
+                        className="bg-green-600 hover:bg-green-700 text-white"
+                        size="lg"
+                      >
+                        <a 
+                          href="https://wa.me/916006256798?text=Hi%2C%20I%20just%20submitted%20a%20booking%20request%20on%20your%20website.%20I%20would%20like%20to%20discuss%20my%20Kashmir%20trip."
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <MessageCircle className="h-5 w-5 mr-2" />
+                          Chat on WhatsApp
+                        </a>
+                      </Button>
+                    </div>
+                  </Card>
+                </div>
+              )}
             </form>
           </Card>
 
