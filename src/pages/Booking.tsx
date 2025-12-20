@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Calendar, Users, Phone, Mail, User, Plane } from "lucide-react";
 import { packages } from "@/data/packages";
 import heroImage from "@/assets/hero-kashmir.jpg";
+import emailjs from "emailjs-com";
 
 const Booking = () => {
   const [searchParams] = useSearchParams();
@@ -37,29 +38,52 @@ const Booking = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    // Validate required fields
-    if (!formData.fullName || !formData.phone || !formData.arrivalDate || !formData.numberOfDays || !formData.adults) {
-      toast({
-        title: "Please fill all required fields",
-        variant: "destructive",
-      });
-      setIsSubmitting(false);
-      return;
-    }
+  if (
+    !formData.fullName ||
+    !formData.phone ||
+    !formData.arrivalDate ||
+    !formData.numberOfDays ||
+    !formData.adults
+  ) {
+    toast({
+      title: "Please fill all required fields",
+      variant: "destructive",
+    });
+    setIsSubmitting(false);
+    return;
+  }
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  try {
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email || "Not provided",
+        arrivalDate: formData.arrivalDate,
+        numberOfDays: formData.numberOfDays,
+        adults: formData.adults,
+        children: formData.children,
+        selectedPackage: formData.selectedPackage || "Not selected",
+        needTickets: formData.needTickets ? "Yes" : "No",
+        specialRequirements:
+          formData.specialRequirements || "No special requirements",
+        year: new Date().getFullYear(),
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    );
 
     toast({
       title: "Booking Request Received!",
-      description: "Our team will contact you within 2 hours to confirm your booking.",
+      description:
+        "Our team will contact you within 2 hours to confirm your booking.",
     });
 
-    // Reset form
     setFormData({
       fullName: "",
       phone: "",
@@ -72,9 +96,18 @@ const Booking = () => {
       needTickets: false,
       specialRequirements: "",
     });
-    
+  } catch (error) {
+    console.error("EmailJS Error:", error);
+    toast({
+      title: "Something went wrong",
+      description: "Please try again or contact us directly.",
+      variant: "destructive",
+    });
+  } finally {
     setIsSubmitting(false);
-  };
+  }
+};
+
 
   return (
     <>
