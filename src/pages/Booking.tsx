@@ -384,22 +384,35 @@ const handleSubmit = async (e: React.FormEvent) => {
                         <h3 className="font-semibold text-lg">Booking Request Submitted!</h3>
                       </div>
                       <p className="text-sm text-green-600 dark:text-green-400">
-                        Want a faster response? Chat with us on WhatsApp for instant assistance.
+                        Want a faster response? Contact us on WhatsApp for instant assistance.
                       </p>
-                      <Button 
-                        asChild
-                        className="bg-green-600 hover:bg-green-700 text-white"
-                        size="lg"
-                      >
-                        <a 
-                          href="https://wa.me/916006256798?text=Hi%2C%20I%20just%20submitted%20a%20booking%20request%20on%20your%20website.%20I%20would%20like%20to%20discuss%20my%20Kashmir%20trip."
-                          target="_blank"
-                          rel="noopener noreferrer"
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <Button 
+                          asChild
+                          className="bg-green-600 hover:bg-green-700 text-white"
+                          size="lg"
                         >
-                          <MessageCircle className="h-5 w-5 mr-2" />
-                          Chat on WhatsApp
-                        </a>
-                      </Button>
+                          <a 
+                            href="https://wa.me/916006256798?text=Hi%2C%20I%20just%20submitted%20a%20booking%20request%20on%20your%20website.%20I%20would%20like%20to%20discuss%20my%20Kashmir%20trip."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <MessageCircle className="h-5 w-5 mr-2" />
+                            WhatsApp: +91 6006256798
+                          </a>
+                        </Button>
+                        <Button 
+                          asChild
+                          variant="outline"
+                          size="lg"
+                          className="border-green-600 text-green-700 hover:bg-green-100 dark:border-green-400 dark:text-green-300"
+                        >
+                          <a href="tel:+916006256798">
+                            <Phone className="h-5 w-5 mr-2" />
+                            Call Now
+                          </a>
+                        </Button>
+                      </div>
                     </div>
                   </Card>
                 </div>
