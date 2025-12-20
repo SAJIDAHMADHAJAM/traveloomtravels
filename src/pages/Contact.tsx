@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
 import heroImage from "@/assets/hero-kashmir.jpg";
+import { Helmet } from "react-helmet-async";
 
 const contactInfo = [
   {
@@ -19,13 +20,13 @@ const contactInfo = [
     icon: Mail,
     title: "Email",
     details: ["traveloomsales@gmail.com", "traveloomsales@gmail.com"],
-    action: { href: "traveloomsales@gmail.com", label: "Send Email" }
+    action: { href: "mailto:traveloomsales@gmail.com", label: "Send Email" }
   },
   {
     icon: MapPin,
     title: "Office Address",
     details: ["Chandiloora Gulmarg, Baramulla", "Jammu & Kashmir, India - 193101"],
-    action: { href: "https://maps.google.com/?q=Residency+Road+Srinagar", label: "Get Directions" }
+    action: { href: "https://maps.google.com/?q=Gulmarg+Kashmir", label: "Get Directions" }
   },
   {
     icon: Clock,
@@ -77,46 +78,64 @@ const Contact = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Contact Traveloom - Kashmir Tour Booking | Call +91 6006256798</title>
+        <meta name="description" content="Contact Traveloom for Kashmir tour bookings. Call +91 6006256798 or WhatsApp for instant quotes. Office: Gulmarg, Kashmir. Best Kashmir, Ladakh & Katra tour packages." />
+        <meta name="keywords" content="contact Kashmir tour, book Kashmir trip, Kashmir tour booking, call Kashmir travel agent, WhatsApp Kashmir tours, Traveloom contact" />
+        <link rel="canonical" href="https://traveloom.in/contact" />
+        <meta property="og:title" content="Contact Traveloom - Book Kashmir Tours" />
+        <meta property="og:description" content="Contact us for Kashmir tour bookings. Call +91 6006256798 or WhatsApp." />
+        <meta property="og:url" content="https://traveloom.in/contact" />
+      </Helmet>
+
       {/* Hero */}
-      <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
+      <header className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Contact Us" className="w-full h-full object-cover" />
+          <img 
+            src={heroImage} 
+            alt="Contact Traveloom - Kashmir tour booking" 
+            className="w-full h-full object-cover" 
+            loading="eager"
+          />
           <div className="absolute inset-0 bg-sky-dark/70" />
         </div>
         <div className="relative z-10 container-custom text-center text-primary-foreground">
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-up">
-            Contact Us
+            Contact Us for Kashmir Tours
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto animate-fade-up delay-100">
-            We're here to help plan your perfect Kashmir trip
+            We're here to help plan your perfect Kashmir, Ladakh or Katra trip - Call +91 6006256798
           </p>
         </div>
-      </section>
+      </header>
 
       {/* Contact Section */}
-      <section className="section-padding bg-gradient-nature">
+      <section className="section-padding bg-gradient-nature" aria-labelledby="contact-heading">
         <div className="container-custom">
+          <h2 id="contact-heading" className="sr-only">Contact Information and Form</h2>
+          
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Info */}
-            <div className="space-y-6">
+            <aside className="space-y-6">
               <div>
                 <p className="text-sm font-medium text-primary tracking-widest uppercase mb-2">Get in Touch</p>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground">
                   We'd Love to Hear From You
-                </h2>
+                </h3>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4" itemScope itemType="https://schema.org/TravelAgency">
+                <meta itemProp="name" content="Traveloom Tour & Travels" />
                 {contactInfo.map((info) => (
                   <Card key={info.title} className="p-4 bg-card">
                     <div className="flex items-start gap-4">
                       <div className="p-2 rounded-lg bg-primary/10">
-                        <info.icon className="h-5 w-5 text-primary" />
+                        <info.icon className="h-5 w-5 text-primary" aria-hidden="true" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
+                        <h4 className="font-semibold text-foreground mb-1">{info.title}</h4>
                         {info.details.map((detail, i) => (
-                          <p key={i} className="text-sm text-muted-foreground">{detail}</p>
+                          <p key={i} className="text-sm text-muted-foreground" itemProp={info.title === "Phone" ? "telephone" : info.title === "Email" ? "email" : undefined}>{detail}</p>
                         ))}
                         {info.action && (
                           <a 
@@ -124,6 +143,7 @@ const Contact = () => {
                             target={info.action.href.startsWith("http") ? "_blank" : undefined}
                             rel={info.action.href.startsWith("http") ? "noopener noreferrer" : undefined}
                             className="text-sm text-primary hover:underline mt-2 inline-block"
+                            aria-label={`${info.action.label} - ${info.title}`}
                           >
                             {info.action.label} →
                           </a>
@@ -137,24 +157,29 @@ const Contact = () => {
               {/* WhatsApp CTA */}
               <Card className="p-6 bg-[#25D366] text-primary-foreground">
                 <div className="flex items-center gap-4">
-                  <MessageCircle className="h-10 w-10" fill="currentColor" />
+                  <MessageCircle className="h-10 w-10" fill="currentColor" aria-hidden="true" />
                   <div>
-                    <h3 className="font-semibold text-lg">Quick Response on WhatsApp</h3>
-                    <p className="text-sm opacity-90">Get instant replies to your queries</p>
+                    <h4 className="font-semibold text-lg">Quick Response on WhatsApp</h4>
+                    <p className="text-sm opacity-90">Get instant Kashmir tour quotes</p>
                   </div>
                 </div>
                 <Button asChild variant="secondary" className="w-full mt-4 bg-primary-foreground text-[#25D366] hover:bg-primary-foreground/90">
-                  <a href="https://wa.me/916006256798" target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href="https://wa.me/916006256798" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label="Chat on WhatsApp for Kashmir tour booking"
+                  >
                     Chat on WhatsApp
                   </a>
                 </Button>
               </Card>
-            </div>
+            </aside>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <Card className="p-6 md:p-8 bg-card">
-                <h3 className="font-display text-xl font-bold text-foreground mb-6">Send us a Message</h3>
+                <h3 className="font-display text-xl font-bold text-foreground mb-6">Send us a Message for Kashmir Tour Inquiry</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -166,6 +191,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
+                        aria-required="true"
                       />
                     </div>
                     <div className="space-y-2">
@@ -195,7 +221,7 @@ const Contact = () => {
                       <Input
                         id="subject"
                         name="subject"
-                        placeholder="Tour Inquiry"
+                        placeholder="Kashmir Tour Inquiry"
                         value={formData.subject}
                         onChange={handleChange}
                       />
@@ -206,16 +232,17 @@ const Contact = () => {
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Tell us about your travel plans or any questions..."
+                      placeholder="Tell us about your Kashmir travel plans - destinations (Srinagar, Gulmarg, Pahalgam, Ladakh, Katra), dates, number of travelers..."
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
                       required
+                      aria-required="true"
                     />
                   </div>
                   <Button type="submit" variant="golden" size="lg" disabled={isSubmitting}>
-                    <Send className="h-4 w-4 mr-2" />
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    <Send className="h-4 w-4 mr-2" aria-hidden="true" />
+                    {isSubmitting ? "Sending..." : "Send Kashmir Tour Inquiry"}
                   </Button>
                 </form>
               </Card>
@@ -232,7 +259,7 @@ const Contact = () => {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Traveloom Office Location"
+              title="Traveloom Office Location - Kashmir Tour Operator"
               className="grayscale hover:grayscale-0 transition-all duration-500"
             />
           </Card>
