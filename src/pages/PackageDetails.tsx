@@ -178,7 +178,7 @@ const PackageDetails = () => {
                 </Button>
                 
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <a href="https://wa.me/919876543210?text=Hi, I'm interested in the ${pkg.name} package">
+                  <a href="https://wa.me/916006256798?text=Hi, I'm interested in the ${pkg.name} package">
                     WhatsApp Inquiry
                   </a>
                 </Button>
