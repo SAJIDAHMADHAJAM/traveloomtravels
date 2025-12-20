@@ -71,7 +71,7 @@ const Index = () => {
         {/* Content */}
         <div className="relative z-10 container-custom text-center text-primary-foreground">
           <div className="max-w-4xl mx-auto space-y-6 animate-fade-up">
-            <p className="text-sm md:text-base font-medium tracking-widest uppercase text-golden">
+            <p className="text-sm md:text-base font-semibold tracking-widest uppercase text-golden drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] bg-black/30 px-4 py-2 rounded-full inline-block backdrop-blur-sm border border-golden/30">
               Welcome to Paradise on Earth
             </p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
