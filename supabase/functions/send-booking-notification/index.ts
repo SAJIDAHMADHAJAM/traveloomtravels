@@ -1,7 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -19,6 +18,29 @@ interface BookingNotificationRequest {
   message?: string;
 }
 
+async function sendEmail(to: string[], subject: string, html: string) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Kashmir Tours <onboarding@resend.dev>",
+      to,
+      subject,
+      html,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Failed to send email: ${error}`);
+  }
+
+  return response.json();
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -31,11 +53,10 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Received booking notification request:", booking);
 
     // Send notification to admin
-    const adminEmailResponse = await resend.emails.send({
-      from: "Kashmir Tours <onboarding@resend.dev>",
-      to: ["traveloomsales@gmail.com"],
-      subject: `New Booking: ${booking.package} - ${booking.name}`,
-      html: `
+    const adminEmailResponse = await sendEmail(
+      ["traveloomsales@gmail.com"],
+      `New Booking: ${booking.package} - ${booking.name}`,
+      `
         <h1>New Booking Received!</h1>
         <h2>Customer Details</h2>
         <ul>
@@ -52,17 +73,16 @@ const handler = async (req: Request): Promise<Response> => {
         ${booking.message ? `<h2>Special Requests</h2><p>${booking.message}</p>` : ''}
         <hr>
         <p>Please respond to this booking at your earliest convenience.</p>
-      `,
-    });
+      `
+    );
 
     console.log("Admin email sent:", adminEmailResponse);
 
     // Send confirmation to customer
-    const customerEmailResponse = await resend.emails.send({
-      from: "Kashmir Tours <onboarding@resend.dev>",
-      to: [booking.email],
-      subject: "Booking Confirmation - Kashmir Tours",
-      html: `
+    const customerEmailResponse = await sendEmail(
+      [booking.email],
+      "Booking Confirmation - Kashmir Tours",
+      `
         <h1>Thank you for your booking, ${booking.name}!</h1>
         <p>We have received your booking request and will get back to you shortly.</p>
         <h2>Your Booking Details</h2>
@@ -75,8 +95,8 @@ const handler = async (req: Request): Promise<Response> => {
         <hr>
         <p>If you have any questions, please don't hesitate to contact us.</p>
         <p>Best regards,<br>Kashmir Tours Team</p>
-      `,
-    });
+      `
+    );
 
     console.log("Customer confirmation email sent:", customerEmailResponse);
 
