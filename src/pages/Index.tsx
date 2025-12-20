@@ -46,11 +46,11 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Best Kashmir Tour Packages 2025 | Srinagar, Gulmarg, Pahalgam Tours - Traveloom</title>
+        <title>Best Kashmir Tour Packages | Srinagar, Gulmarg, Pahalgam Tours - Traveloom</title>
         <meta name="description" content="Book affordable Kashmir tour packages from ₹12,999. Explore Srinagar Dal Lake, Gulmarg Gondola, Pahalgam valleys, Sonamarg glaciers. Local experts, 24/7 support, best prices. Call +91 6006256798" />
         <meta name="keywords" content="Kashmir tour packages, Kashmir tourism, Srinagar tour, Gulmarg trip, Pahalgam vacation, Sonamarg tour, Ladakh packages, Katra tour, Kashmir honeymoon, Dal Lake houseboat, Kashmir holiday 2025" />
         <link rel="canonical" href="https://traveloom.in/" />
-        <meta property="og:title" content="Best Kashmir Tour Packages 2025 - Traveloom" />
+        <meta property="og:title" content="Best Kashmir Tour Packages - Traveloom" />
         <meta property="og:description" content="Book Kashmir tours from ₹12,999. Srinagar, Gulmarg, Pahalgam, Sonamarg with local experts." />
         <meta property="og:url" content="https://traveloom.in/" />
       </Helmet>
@@ -75,7 +75,7 @@ const Index = () => {
               Welcome to Paradise on Earth
             </p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
-              Best <span className="text-golden">Kashmir</span> Tour Packages 2025
+              Best <span className="text-golden">Kashmir</span> Tour Packages
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto">
               Affordable Kashmir Holiday Packages | Srinagar, Gulmarg, Pahalgam, Sonamarg, Ladakh & Katra Tours | Local Experts Since 2014
