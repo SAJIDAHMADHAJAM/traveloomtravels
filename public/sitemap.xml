@@ -71,6 +71,19 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- Amarnath Yatra Helicopter Booking -->
+  <url>
+    <loc>https://traveloom.in/amarnath-yatra-helicopter-booking</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://traveloom.in/og-kashmir.jpg</image:loc>
+      <image:title>Amarnath Yatra Helicopter Booking 2026</image:title>
+      <image:caption>Book Amarnath helicopter tickets from Baltal, Pahalgam and Sonamarg</image:caption>
+    </image:image>
+  </url>
+
   <!-- Booking Page -->
   <url>
     <loc>https://traveloom.in/booking</loc>

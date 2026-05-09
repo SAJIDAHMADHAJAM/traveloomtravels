@@ -7,6 +7,7 @@ import logo from "@/assets/logo.png";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Packages", path: "/packages" },
+  { name: "Amarnath Yatra", path: "/amarnath-yatra-helicopter-booking" },
   { name: "About Us", path: "/about" },
   { name: "Contact", path: "/contact" },
 ];

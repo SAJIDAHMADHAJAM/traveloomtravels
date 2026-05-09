@@ -11,6 +11,7 @@ import PackageDetails from "./pages/PackageDetails";
 import Booking from "./pages/Booking";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import AmarnathYatra from "./pages/AmarnathYatra";
 // import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +32,9 @@ const App = () => (
               <Route path="/booking" element={<Booking />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/amarnath-yatra-helicopter-booking" element={<AmarnathYatra />} />
+              <Route path="/amarnath-yatra" element={<AmarnathYatra />} />
+              <Route path="/amarnath" element={<AmarnathYatra />} />
               {/* <Route path="/admin" element={<Admin />} /> */}
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
